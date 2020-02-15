@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:600&display=swap" rel="stylesheet">
+	<link href="calcStyles.css" rel="calcStyles">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  </head>
+  <body>
+  <div class="calculator">
+      <div class="display">
+        <div class="displaytext">
+        Evaluation
+        </div>
+      </div>
+      <div class="expression_container">
+        <div class="expression">0</div>
+      </div>
+      <div class="calculator-keys">
+        <button class="bracketL">(</button>
+        <button class="bracketR">)</button>
+        <button class="clear">AC</button>
+        <button class="operator" data-action="multiply">&times;</button>
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button class="operator" data-action="divide">÷</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button class="operator" data-action="subtract">-</button>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button class="operator" data-action="add">+</button>
+        <button>0</button>
+        <button>.</button>
+        <button class="evaluate" id="equals">=</button>
+      </div>
+  </div>
+  <script>
+  	window.onload = function(){
+      const keys = document.getElementsByClassName("button");
+      const display = document.getElementsByClassName("displaytext");
+      const expression = document.getElementsByTagName("expression");
+      
+      display.innerHTML = 'hello';
+      
+      for(var i = 0; i < keys.length; i++){
+        if(keys[i].innerHTML === '='){
+            keys[i].addEventListener("click", calculate(i));
+        }else if(keys[i].innerHTML === "AC"){
+        	keys[i].addEventListener("click", clear());
+        }else{
+           keys[i].addEventListener("click", addToCurrentValue(i));
+        }
+      }
+      
+      function clear(){
+      	display.innerHTML = ' ';
+      }
+      
+      function addToCurrentValue(i){
+      	return function(){
+				if (keys[i].innerHTML === "÷") {
+               expression.innerHTML  +=  "/ " ;
+      	}else if(keys[i].innerHTML === "&times;"){
+			      expression.innerHTML += "*";
+		   	} else{
+			   expression.innerHTML  += keys[i].innerHTML;
+		   	}
+	  		};
+      }
+    };
+  </script>
+  </body>
+</html>
