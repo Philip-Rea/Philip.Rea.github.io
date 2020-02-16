@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- Philip Rea, 30002832, B02 -->
+
 <html>
   <head>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:600&display=swap" rel="stylesheet">
@@ -9,21 +11,21 @@
   <div class="calculator">
       <div class="display">
         <div class="displaytext">
-        Evaluation
+        -
         </div>
       </div>
       <div class="expression_container">
-        <div class="expression">0</div>
+        <div class="expression">-</div>
       </div>
       <div class="calculator-keys">
         <button class="bracketL">(</button>
         <button class="bracketR">)</button>
-        <button class="clear">AC</button>
-        <button class="operator" data-action="multiply">&times;</button>
+        <button class="clear">CE</button>
+        <button class="operator" data-action="multiply">*</button>
         <button>7</button>
         <button>8</button>
         <button>9</button>
-        <button class="operator" data-action="divide">÷</button>
+        <button class="operator" data-action="divide">/</button>
         <button>4</button>
         <button>5</button>
         <button>6</button>
@@ -38,39 +40,60 @@
       </div>
   </div>
   <script>
-  	document.onload = function(){
+  	window.onload = function(){
       const keys = document.getElementsByTagName("button");
-      const display = document.getElementsByClassName("displaytext");
-      const expression = document.getElementsByClassName("expression");
-      
-      display.innerHTML = 'hello';
+      const display = document.getElementsByClassName("displaytext")[0];
+      const expression = document.getElementsByClassName("expression")[0];
       
       for(var i = 0; i < keys.length; i++){
         if(keys[i].innerHTML === '='){
-            keys[i].addEventListener("click", calculate(i));
-			console.log("added event listener to " + keys[i].innerHTML);
-        }else if(keys[i].innerHTML === "AC"){
+            keys[i].addEventListener("click", calculate());
+			console.log(keys[i].innerHTML);
+        }else if(keys[i].innerHTML === "CE"){
         	keys[i].addEventListener("click", clear());
+			console.log(keys[i].innerHTML);
         }else{
            keys[i].addEventListener("click", addToCurrentValue(i));
+		   console.log(keys[i].innerHTML);
         }
       }
       
       function clear(){
-      	display.innerHTML = ' ';
+		return function (){
+			display.innerHTML = '-';
+			expression.innerHTML = '-';
+		}
       }
       
       function addToCurrentValue(i){
       	return function(){
-				if (keys[i].innerHTML === "÷") {
-               expression.innerHTML  +=  "/ " ;
-      	}else if(keys[i].innerHTML === "&times;"){
-			      expression.innerHTML += "*";
-		   	} else{
-			   expression.innerHTML  += keys[i].innerHTML;
-		   	}
-	  		};
+			if(expression.innerHTML !== '-'){
+				if (keys[i].innerHTML === "/") {
+					expression.innerHTML  +=  " / " ;
+				}else if(keys[i].innerHTML === "*"){
+					expression.innerHTML += " * ";
+				} else{
+				   expression.innerHTML  += keys[i].innerHTML;
+				}
+			} else {
+				if (keys[i].innerHTML === "/" ||
+					keys[i].innerHTML === "+" ||
+					keys[i].innerHTML === "-" ||
+					keys[i].innerHTML === "*") {
+				}else{
+				   expression.innerHTML  = keys[i].innerHTML;
+				}
+			}
+		};
       }
+	  
+	  function calculate() {
+		return function () {
+			console.log(expression.innerHTML);
+			const evaluate = expression.innerText;
+			display.innerHTML = eval(evaluate);
+		};
+	  }
     };
   </script>
   </body>
