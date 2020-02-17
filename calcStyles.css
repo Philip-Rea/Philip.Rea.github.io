@@ -1,7 +1,6 @@
 /*Philip Rea, 30002832, B02 */
 
-@media only screen and (max-device-width <= 480px) {
-	/* list rules for devices with horizontal resolution up to 480px */
+@media only screen and (max-width <= 600px) {
 	.calculator {
 	  border: 2px solid black;
 	  border-radius: 15px;
