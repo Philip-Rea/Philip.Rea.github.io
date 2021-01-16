@@ -1,3 +1,3 @@
-Philip Rea, 30002832, B02
-https://philip-rea.github.io/Philip.Rea.github.io/
-Chrome and Firefox tested. Chrome on mobile tested
+A simple browser calculator made with HTML, CSS, and Javascript.
+
+Chrome and Firefox tested. Chrome on mobile tested.
